@@ -42,7 +42,7 @@ export function RadialGlossary() {
             {glossaryItems.map((item, index) => {
               const angle = -90 + (index * 360) / glossaryItems.length;
               const radians = (angle * Math.PI) / 180;
-              const radius = 88;
+              const radius = 92;
               const x = Math.cos(radians) * radius;
               const y = Math.sin(radians) * radius;
               return (
@@ -53,20 +53,20 @@ export function RadialGlossary() {
                   aria-label={item.term}
                   onClick={() => setActiveId(item.id)}
                   className={cn(
-                    "absolute left-1/2 top-1/2 inline-flex h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white px-2 text-[10px] font-bold text-zinc-700 shadow-sm transition-all duration-200",
+                    "absolute left-1/2 top-1/2 inline-flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-[10px] font-bold text-zinc-700 shadow-sm transition-all duration-200",
                     activeId === item.id && "border-emerald-300 bg-emerald-50 text-emerald-700 shadow",
                   )}
                   style={{
                     transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
                   }}
                 >
-                  {item.shortLabel}
+                  <span className="max-w-[36px] text-center leading-tight">{item.shortLabel}</span>
                 </button>
               );
             })}
           </div>
 
-          <p className="mt-1 text-sm font-bold text-zinc-900">{active.term}</p>
+          <p className="mt-3 text-sm font-bold text-zinc-900">{active.term}</p>
           <p className="mt-2 text-sm leading-relaxed text-zinc-700">{active.definition}</p>
           <p className="mt-2 rounded-lg bg-zinc-50 p-2 text-xs leading-relaxed text-zinc-600">Contexte: {active.context}</p>
         </div>
