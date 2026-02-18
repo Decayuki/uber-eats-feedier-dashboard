@@ -1,6 +1,6 @@
 import { ActionItem } from "@/lib/types";
 
-// Code formateur par défaut. Modifiez cette constante pour changer le code d'accès.
+// Code du magnifique professeur par défaut. Modifiez cette constante pour changer le code d'accès.
 export const UNLOCK_CODE = "FEEDIER2026";
 
 export const actionPlan: ActionItem[] = [
@@ -53,7 +53,7 @@ export const actionPlan: ActionItem[] = [
     owner: "CX (Clara Fontaine) + Tech",
     timeline: "1-3 mois",
     description:
-      "Remplacer le chatbot actuel par un parcours hybride : IA pour les cas simples (remboursement automatique < 15€), escalade humaine garantie en < 5 min pour les cas complexes. Le taux de sentiment négatif sur 'Gestion réclamations' atteint 55% au-delà de 35 min.",
+      "Remplacer le chatbot actuel par un parcours hybride : automatisation pour les cas simples (remboursement automatique < 15€), escalade humaine garantie en < 5 min pour les cas complexes. Le taux de sentiment négatif sur 'Gestion réclamations' atteint 55% au-delà de 35 min.",
     supportingVerbatims: ["V027", "V029", "V045"],
   },
   {

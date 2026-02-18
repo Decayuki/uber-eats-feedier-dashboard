@@ -154,7 +154,7 @@ export function ActionPlanContent({ actions }: ActionPlanContentProps) {
         <h3 className="text-base font-bold text-zinc-900">Comparaison pédagogique</h3>
         <p className="mt-2 text-sm text-zinc-700">
           {
-            "Comparez maintenant votre plan d'action avec cette proposition IA. Identifiez les écarts de priorisation, les quick wins manqués et les hypothèses différentes sur l'effort."
+            "Comparez maintenant votre plan d'action avec cette proposition du magnifique professeur. Identifiez les écarts de priorisation, les quick wins manqués et les hypothèses différentes sur l'effort."
           }
         </p>
       </section>

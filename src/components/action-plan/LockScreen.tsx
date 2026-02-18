@@ -15,7 +15,7 @@ export function LockScreen({ onValidate }: LockScreenProps) {
   const handleSubmit = () => {
     const ok = onValidate(code);
     if (!ok) {
-      setError("Code invalide. Vérifiez auprès du formateur.");
+      setError("Code invalide. Vérifiez auprès du génialissime professeur.");
       setShake(true);
       setTimeout(() => setShake(false), 350);
       return;
@@ -29,9 +29,9 @@ export function LockScreen({ onValidate }: LockScreenProps) {
         <div className="mb-4 inline-flex rounded-full bg-zinc-100 p-4 text-zinc-700">
           <Lock className="h-8 w-8" />
         </div>
-        <h2 className="text-2xl font-bold text-zinc-900">Accès restreint — Code formateur</h2>
+        <h2 className="text-2xl font-bold text-zinc-900">Accès restreint — Code du magnifique professeur</h2>
         <p className="mt-2 text-zinc-600">
-          {"Cette vue contient le plan d'action généré par l'IA Feedier. Construisez d'abord votre propre plan (Mission 4), puis comparez."}
+          {"Cette vue contient le plan d'action réalisé par votre magnifique professeur. Construisez d'abord votre propre plan (Mission 4), puis comparez."}
         </p>
 
         <div className={`mx-auto mt-6 flex max-w-md gap-2 ${shake ? "animate-shake" : ""}`}>
@@ -39,10 +39,10 @@ export function LockScreen({ onValidate }: LockScreenProps) {
             value={code}
             onChange={(event) => setCode(event.target.value)}
             onKeyDown={(event) => event.key === "Enter" && handleSubmit()}
-            title="Saisissez le code communiqué par le formateur pour accéder à la proposition IA."
+            title="Saisissez le code communiqué par le génialissime professeur pour accéder à sa proposition."
             className="w-full rounded-xl border border-zinc-300 px-4 py-2.5 text-sm outline-none focus:border-emerald-500"
-            placeholder="Entrez le code formateur"
-            aria-label="Code formateur"
+            placeholder="Entrez le code du magnifique professeur"
+            aria-label="Code du magnifique professeur"
           />
           <button
             type="button"
@@ -55,7 +55,7 @@ export function LockScreen({ onValidate }: LockScreenProps) {
         </div>
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
 
-        <p className="mt-4 text-sm text-zinc-500">Demandez le code au formateur une fois la Mission 4 terminée.</p>
+        <p className="mt-4 text-sm text-zinc-500">Demandez le code au magnifique professeur une fois la Mission 4 terminée.</p>
       </div>
     </section>
   );
