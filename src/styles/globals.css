@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #06c167;
+  --color-primary-light: #e8f9ef;
+  --color-primary-dark: #059652;
+  --color-surface: #ffffff;
+  --color-shell-a: #f7f8fc;
+  --color-shell-b: #eef3f0;
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  border-color: #e5e7eb;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+.bg-shell {
+  background:
+    radial-gradient(1200px 420px at -10% -20%, #d9f7e6 0%, transparent 60%),
+    radial-gradient(900px 500px at 105% 0%, #edf7ff 0%, transparent 50%),
+    linear-gradient(165deg, var(--color-shell-a) 0%, var(--color-shell-b) 100%);
+}
+
+.card-glass {
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.88));
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.35s ease-in-out;
+}
