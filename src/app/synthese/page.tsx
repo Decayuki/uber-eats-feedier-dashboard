@@ -31,6 +31,25 @@ const icons = {
   "Délai moyen": <Hourglass className="h-4 w-4 text-zinc-500" />,
 };
 
+const kpiHints: Record<string, { text: string; context: string }> = {
+  "CSAT Global": {
+    text: "CSAT: niveau de satisfaction immédiate après l'expérience de livraison.",
+    context: "Ici, 3.8/5 reste légèrement sous la moyenne secteur affichée.",
+  },
+  "CES (effort client)": {
+    text: "CES: effort perçu par le client pour commander, suivre et résoudre un problème.",
+    context: "Un score proche ou supérieur à 3 signale une friction opérationnelle.",
+  },
+  "Taux de réclamation": {
+    text: "Part des commandes générant une réclamation client.",
+    context: "La hausse indique une pression sur la qualité perçue et le support.",
+  },
+  "Délai moyen": {
+    text: "Temps moyen entre commande et livraison effective.",
+    context: "Au-delà de 35-45 minutes, le risque de dégradation du sentiment augmente fortement.",
+  },
+};
+
 const zoneData = [
   { zone: "Centre-ville", nps: 61, fill: "#06C167" },
   { zone: "Périurbain", nps: 38, fill: "#F9AB00" },
@@ -74,7 +93,13 @@ export default function SynthesePage() {
         {headlineKpis
           .filter((item) => item.label !== "NPS Global")
           .map((item) => (
-            <KPICard key={item.label} item={item} icon={icons[item.label as keyof typeof icons]} />
+            <KPICard
+              key={item.label}
+              item={item}
+              icon={icons[item.label as keyof typeof icons]}
+              hintText={kpiHints[item.label]?.text}
+              hintContext={kpiHints[item.label]?.context}
+            />
           ))}
       </section>
 
