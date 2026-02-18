@@ -29,54 +29,47 @@ export function RadialGlossary() {
 
         <div
           className={cn(
-            "pointer-events-none absolute bottom-16 right-16 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
-            open ? "w-[340px] opacity-100" : "w-0 overflow-hidden opacity-0",
+            "pointer-events-none absolute bottom-16 right-0 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
+            open ? "w-[min(92vw,380px)] opacity-100" : "w-0 overflow-hidden opacity-0",
           )}
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Glossaire pédagogique</p>
+
+          <div className="relative mx-auto mt-2 h-56 w-56">
+            <div className="absolute left-1/2 top-1/2 -ml-7 -mt-7 inline-flex h-14 w-14 items-center justify-center rounded-full border border-zinc-200 bg-zinc-900 text-xs font-bold text-white shadow">
+              CX
+            </div>
+            {glossaryItems.map((item, index) => {
+              const angle = -90 + (index * 360) / glossaryItems.length;
+              const radians = (angle * Math.PI) / 180;
+              const radius = 88;
+              const x = Math.cos(radians) * radius;
+              const y = Math.sin(radians) * radius;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  title={`${item.term} — ${item.definition}`}
+                  aria-label={item.term}
+                  onClick={() => setActiveId(item.id)}
+                  className={cn(
+                    "absolute left-1/2 top-1/2 inline-flex h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white px-2 text-[10px] font-bold text-zinc-700 shadow-sm transition-all duration-200",
+                    activeId === item.id && "border-emerald-300 bg-emerald-50 text-emerald-700 shadow",
+                  )}
+                  style={{
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                  }}
+                >
+                  {item.shortLabel}
+                </button>
+              );
+            })}
+          </div>
+
           <p className="mt-1 text-sm font-bold text-zinc-900">{active.term}</p>
           <p className="mt-2 text-sm leading-relaxed text-zinc-700">{active.definition}</p>
           <p className="mt-2 rounded-lg bg-zinc-50 p-2 text-xs leading-relaxed text-zinc-600">Contexte: {active.context}</p>
         </div>
-
-        {glossaryItems.map((item, index) => {
-          const firstRingCount = Math.min(5, glossaryItems.length);
-          const inFirstRing = index < firstRingCount;
-          const ringIndex = inFirstRing ? index : index - firstRingCount;
-          const ringTotal = inFirstRing ? firstRingCount : Math.max(glossaryItems.length - firstRingCount, 1);
-          const minAngle = inFirstRing ? 170 : 185;
-          const maxAngle = inFirstRing ? 262 : 260;
-          const angle = minAngle + ((maxAngle - minAngle) * ringIndex) / Math.max(ringTotal - 1, 1);
-          const radius = inFirstRing ? 96 : 146;
-          const radians = (angle * Math.PI) / 180;
-          const x = Math.cos(radians) * radius;
-          const y = Math.sin(radians) * radius;
-
-          return (
-            <button
-              key={item.id}
-              type="button"
-              title={`${item.term} — ${item.definition}`}
-              aria-label={item.term}
-              onClick={() => {
-                setActiveId(item.id);
-                setOpen(true);
-              }}
-              className={cn(
-                "pointer-events-none absolute bottom-7 right-7 inline-flex h-12 min-w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white px-2 text-[10px] font-bold text-zinc-700 shadow-md transition-all duration-300",
-                open ? "pointer-events-auto opacity-100" : "opacity-0",
-                activeId === item.id && "border-emerald-300 bg-emerald-50 text-emerald-700",
-              )}
-              style={{
-                transform: open
-                  ? `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
-                  : "translate(-50%, -50%)",
-              }}
-            >
-              {item.shortLabel}
-            </button>
-          );
-        })}
       </div>
     </div>
   );
