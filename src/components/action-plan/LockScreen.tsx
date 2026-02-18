@@ -39,6 +39,7 @@ export function LockScreen({ onValidate }: LockScreenProps) {
             value={code}
             onChange={(event) => setCode(event.target.value)}
             onKeyDown={(event) => event.key === "Enter" && handleSubmit()}
+            title="Saisissez le code communiqué par le formateur pour accéder à la proposition IA."
             className="w-full rounded-xl border border-zinc-300 px-4 py-2.5 text-sm outline-none focus:border-emerald-500"
             placeholder="Entrez le code formateur"
             aria-label="Code formateur"
@@ -46,6 +47,7 @@ export function LockScreen({ onValidate }: LockScreenProps) {
           <button
             type="button"
             onClick={handleSubmit}
+            title="Valider le code d'accès."
             className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
           >
             Valider

@@ -15,7 +15,11 @@ const COLORS = ["#06C167", "#F9AB00", "#D93025"];
 
 export function SegmentDonut({ data }: SegmentDonutProps) {
   return (
-    <div className="h-56 w-full">
+    <div
+      title="Répartition en anneau des proportions par catégorie."
+      aria-label="Diagramme en anneau de distribution"
+      className="h-56 w-full"
+    >
       <ResponsiveContainer>
         <PieChart>
           <Pie

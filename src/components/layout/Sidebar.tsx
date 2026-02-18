@@ -51,6 +51,7 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              title={`Accéder à la vue ${item.label}`}
               className={cn(
                 "flex items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-sm font-semibold transition-all duration-200",
                 active
@@ -66,13 +67,13 @@ export function Sidebar() {
       </nav>
 
       <div className="mt-8 border-t border-zinc-800 pt-4 text-xs text-zinc-400">
-        <p className="mb-2 inline-flex items-center gap-2">
+        <p title="Période couverte par l'étude pédagogique." className="mb-2 inline-flex items-center gap-2">
           <CalendarDays className="h-3.5 w-3.5" /> Sept 2025 - Jan 2026
         </p>
-        <p className="mb-2 inline-flex items-center gap-2">
+        <p title="Volume total de feedbacks simulés dans le cas d'étude." className="mb-2 inline-flex items-center gap-2">
           <FileText className="h-3.5 w-3.5" /> 2 000 feedbacks
         </p>
-        <p>52% avec verbatim</p>
+        <p title="Part des feedbacks contenant un commentaire textuel exploitable.">52% avec verbatim</p>
       </div>
     </aside>
   );

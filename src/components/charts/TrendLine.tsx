@@ -21,7 +21,11 @@ interface TrendLineProps {
 
 export function TrendLine({ data, xKey, lineKeys, yDomain = [-1, 1], ySuffix = "" }: TrendLineProps) {
   return (
-    <div className="h-64 w-full">
+    <div
+      title="Courbe d'évolution: lire la pente pour estimer la sensibilité d'un thème."
+      aria-label="Graphique de tendance multi-séries"
+      className="h-64 w-full"
+    >
       <ResponsiveContainer>
         <LineChart data={data} margin={{ top: 8, right: 16, left: 0, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />

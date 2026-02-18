@@ -16,6 +16,7 @@ import {
 import { Header } from "@/components/layout/Header";
 import { FilterPanel } from "@/components/verbatims/FilterPanel";
 import { VerbatimTable } from "@/components/verbatims/VerbatimTable";
+import { Tooltip as Hint } from "@/components/ui/Tooltip";
 import { filterVerbatims, computeFilteredKpis, sentimentBreakdownByDelay } from "@/lib/filters";
 import { verbatims } from "@/data/verbatims";
 import { Segment, Sentiment, Theme, TrancheDelai, TypeCommande, Zone } from "@/lib/types";
@@ -56,6 +57,8 @@ export default function ExplorationPage() {
       <Header
         title="Exploration par attributs"
         subtitle="Filtrage multi-dimensionnel pour analyser l'impact de chaque attribut sur le ressenti client"
+        helpText="Page d'investigation: combine plusieurs filtres pour tester des hypothèses (zone, délai, thème, sentiment)."
+        helpContext="Utiliser cette vue pour passer d'un constat global à un diagnostic explicatif."
       />
 
       <FilterPanel
@@ -65,8 +68,11 @@ export default function ExplorationPage() {
       />
 
       <section className="grid gap-4 xl:grid-cols-[1fr_1.4fr]">
-        <article className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-base font-bold">KPIs filtrés</h2>
+        <article title="KPI recalculés en temps réel selon les filtres actifs." className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold">
+            KPIs filtrés
+            <Hint text="Les valeurs changent selon le sous-ensemble sélectionné." />
+          </h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <MetricCard label="Volume" value={`${metrics.count}`} />
             <MetricCard label="NPS" value={`${metrics.nps}`} />
@@ -79,8 +85,11 @@ export default function ExplorationPage() {
           <p className="mt-3 text-sm text-zinc-600">{metrics.count} verbatims correspondent à vos filtres.</p>
         </article>
 
-        <article className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-base font-bold">Distribution sentiment</h2>
+        <article title="Répartition des tonalités positives, neutres et négatives." className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold">
+            Distribution sentiment
+            <Hint text="Visualise l'équilibre émotionnel du périmètre filtré." />
+          </h2>
           <div className="h-60">
             <ResponsiveContainer>
               <PieChart>
@@ -96,8 +105,11 @@ export default function ExplorationPage() {
         </article>
       </section>
 
-      <section className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 text-base font-bold">NPS par tranche de délai</h2>
+      <section title="Met en évidence l'impact du délai sur la satisfaction." className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold">
+          NPS par tranche de délai
+          <Hint text="Le marquage rouge (>45 min) montre la zone où la perception se dégrade fortement." />
+        </h2>
         <div className="h-72">
           <ResponsiveContainer>
             <BarChart data={byDelay} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
@@ -123,7 +135,7 @@ export default function ExplorationPage() {
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <article className="rounded-xl border border-zinc-200 bg-zinc-50 p-3">
+    <article title={`${label}: ${value}`} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3">
       <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{label}</p>
       <p className="mt-1 font-mono text-2xl font-semibold tabular-nums text-zinc-900">{value}</p>
     </article>

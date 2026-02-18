@@ -12,6 +12,7 @@ import {
   ZAxis,
 } from "recharts";
 import { Badge } from "@/components/ui/Badge";
+import { Tooltip as Hint } from "@/components/ui/Tooltip";
 import { ActionItem } from "@/lib/types";
 
 interface ActionPlanContentProps {
@@ -44,8 +45,11 @@ export function ActionPlanContent({ actions }: ActionPlanContentProps) {
 
   return (
     <div className="space-y-5">
-      <section className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-        <h3 className="mb-4 text-lg font-bold text-zinc-900">Matrice Impact / Effort</h3>
+      <section title="Positionnement des actions selon leur potentiel et la charge de mise en oeuvre." className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+        <h3 className="mb-4 inline-flex items-center gap-1 text-lg font-bold text-zinc-900">
+          Matrice Impact / Effort
+          <Hint text="Prioriser d'abord les actions à fort impact et effort faible ou moyen." />
+        </h3>
         <div className="h-[320px]">
           <ResponsiveContainer>
             <ScatterChart margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
@@ -101,7 +105,11 @@ export function ActionPlanContent({ actions }: ActionPlanContentProps) {
 
       <section className="space-y-3">
         {priorityOrder.map((action) => (
-          <article key={action.id} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+          <article
+            key={action.id}
+            title={`Action ${action.id}: impact ${action.impact}, effort ${action.effort}, owner ${action.owner}`}
+            className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"
+          >
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
                 <h4 className="text-base font-bold text-zinc-900">
@@ -131,6 +139,7 @@ export function ActionPlanContent({ actions }: ActionPlanContentProps) {
                 <Link
                   key={id}
                   href={`/verbatims?search=${id}`}
+                  title={`Ouvrir le verbatim ${id} dans la vue d'analyse détaillée.`}
                   className="rounded-lg border border-zinc-200 px-2 py-1 font-mono text-xs text-zinc-700 transition hover:bg-zinc-100"
                 >
                   {id}

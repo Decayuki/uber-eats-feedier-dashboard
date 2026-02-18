@@ -11,7 +11,11 @@ export function NPSGauge({ value }: NPSGaugeProps) {
   const fill = capped >= 50 ? "#06C167" : capped >= 30 ? "#F9AB00" : "#D93025";
 
   return (
-    <div className="h-32 w-full">
+    <div
+      title="Jauge NPS: vert au-dessus de 50, jaune entre 30 et 50, rouge en dessous de 30."
+      aria-label={`Jauge NPS à ${capped}`}
+      className="h-32 w-full"
+    >
       <ResponsiveContainer>
         <RadialBarChart
           data={[{ name: "NPS", value: capped }]}

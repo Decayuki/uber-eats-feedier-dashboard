@@ -29,6 +29,7 @@ export function VerbatimTable({ data }: VerbatimTableProps) {
         <select
           className="rounded-lg border border-zinc-200 px-3 py-1.5 text-sm"
           aria-label="Tri du tableau"
+          title="Changer le tri des verbatims filtrés."
           value={sortKey}
           onChange={(event) => setSortKey(event.target.value as SortKey)}
         >
@@ -55,6 +56,7 @@ export function VerbatimTable({ data }: VerbatimTableProps) {
             {sorted.map((item) => (
               <tr
                 key={item.id}
+                title={`Ouvrir ${item.id}: ${item.theme}, ${item.sentiment}, NPS ${item.nps}`}
                 className="cursor-pointer rounded-lg bg-zinc-50 text-zinc-700 transition hover:bg-zinc-100"
                 onClick={() => setSelected(item)}
               >
@@ -87,6 +89,7 @@ export function VerbatimTable({ data }: VerbatimTableProps) {
               <button
                 type="button"
                 onClick={() => setSelected(null)}
+                title="Fermer la fiche verbatim."
                 className="rounded-lg border border-zinc-200 px-3 py-1 text-sm"
               >
                 Fermer

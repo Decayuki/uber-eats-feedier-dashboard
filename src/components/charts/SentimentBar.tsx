@@ -15,7 +15,11 @@ interface SentimentBarProps {
 
 export function SentimentBar({ data }: SentimentBarProps) {
   return (
-    <div className="h-[260px] w-full">
+    <div
+      title="Barres empilées: part de verbatims positifs, neutres et négatifs par segment."
+      aria-label="Graphique de sentiment par segment"
+      className="h-[260px] w-full"
+    >
       <ResponsiveContainer>
         <BarChart data={data} layout="vertical" margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />

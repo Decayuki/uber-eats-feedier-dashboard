@@ -32,6 +32,7 @@ export function CorrelationHeatmap({ matrix, verbatims, onCellClick }: Correlati
             {delays.map((delay) => (
               <div
                 key={delay}
+                title={`Tranche de délai ${delay}`}
                 className={`rounded-lg p-2 text-center font-semibold ${delay === "35-45 min" ? "border-2 border-zinc-900" : ""}`}
               >
                 {delay}
@@ -48,6 +49,7 @@ export function CorrelationHeatmap({ matrix, verbatims, onCellClick }: Correlati
                   return (
                     <button
                       key={`${row.theme}-${delay}`}
+                      title={`${row.theme} x ${delay}: ${value}% de sentiment positif. Cliquer pour filtrer les verbatims.`}
                       className={`rounded-lg p-2 font-mono text-sm font-semibold text-zinc-900 transition-all duration-200 hover:scale-[1.02] ${
                         delay === "35-45 min" ? "border-2 border-zinc-900" : "border border-transparent"
                       }`}

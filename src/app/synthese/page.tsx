@@ -17,6 +17,7 @@ import { KPICard } from "@/components/layout/KPICard";
 import { NPSGauge } from "@/components/charts/NPSGauge";
 import { SentimentBar } from "@/components/charts/SentimentBar";
 import { Badge } from "@/components/ui/Badge";
+import { Tooltip as Hint } from "@/components/ui/Tooltip";
 import { headlineKpiLabels, kpis } from "@/data/kpis";
 import { segments } from "@/data/segments";
 import { verbatims } from "@/data/verbatims";
@@ -54,11 +55,19 @@ export default function SynthesePage() {
       <Header
         title="Synthèse globale — Uber Eats France"
         subtitle="Vue d'ensemble CX pour un diagnostic rapide sur septembre 2025 à janvier 2026"
+        helpText="Vue macro de la performance CX. Lire cette page avant de passer aux analyses causales."
+        helpContext="Objectif pédagogique: formuler un diagnostic initial en 3 minutes à partir des KPI et signaux de segments."
       />
 
       <section className="grid gap-3 lg:grid-cols-[1.2fr_repeat(4,minmax(0,1fr))]">
-        <article className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">NPS Global</p>
+        <article
+          title="NPS global: indicateur de recommandation net sur l'ensemble du périmètre."
+          className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
+        >
+          <p className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+            NPS Global
+            <Hint text="Score global de recommandation. Plus il est élevé, plus la propension à recommander est forte." />
+          </p>
           <NPSGauge value={npsGlobal} />
         </article>
 
@@ -71,7 +80,10 @@ export default function SynthesePage() {
 
       <section className="grid gap-4 xl:grid-cols-[1.1fr_1.4fr]">
         <article className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-base font-bold text-zinc-900">Répartition NPS par zone</h2>
+          <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold text-zinc-900">
+            Répartition NPS par zone
+            <Hint text="Compare les écarts de satisfaction entre zones géographiques pour cibler les investissements opérationnels." />
+          </h2>
           <div className="h-[280px]">
             <ResponsiveContainer>
               <BarChart data={zoneData} layout="vertical" margin={{ top: 6, right: 18, left: 0, bottom: 8 }}>
@@ -89,14 +101,21 @@ export default function SynthesePage() {
         </article>
 
         <article className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-base font-bold text-zinc-900">Sentiment global par segment</h2>
+          <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold text-zinc-900">
+            Sentiment global par segment
+            <Hint text="Lecture qualitative par segment: part de positif, neutre et négatif." />
+          </h2>
           <SentimentBar data={sentimentBySegment} />
         </article>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
         {segments.map((segment) => (
-          <article key={segment.name} className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <article
+            key={segment.name}
+            title={`Segment ${segment.name}: NPS ${segment.nps}, volume ${segment.verbatimCount}`}
+            className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
+          >
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-base font-bold text-zinc-900">{segment.name}</h3>
@@ -107,7 +126,7 @@ export default function SynthesePage() {
 
             <div className="mt-3 flex flex-wrap gap-2">
               {segment.themes.map((theme) => (
-                <Badge key={theme} variant="primary">
+                <Badge key={theme} variant="primary" className="cursor-help" title={`Thématique clé du segment: ${theme}`}>
                   {theme}
                 </Badge>
               ))}
@@ -125,10 +144,17 @@ export default function SynthesePage() {
       </section>
 
       <section className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 text-base font-bold text-zinc-900">Top 5 verbatims les plus récents</h2>
+        <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold text-zinc-900">
+          Top 5 verbatims les plus récents
+          <Hint text="Extraits les plus récents pour repérer les signaux faibles et les incidents émergents." />
+        </h2>
         <div className="max-h-[320px] space-y-3 overflow-auto pr-1">
           {latestVerbatims.map((item) => (
-            <article key={item.id} className="rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+            <article
+              key={item.id}
+              title={`Verbatim ${item.id}: ${item.sentiment}, NPS ${item.nps}, ${item.zone}`}
+              className="rounded-lg border border-zinc-200 bg-zinc-50 p-3"
+            >
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <Badge>{item.id}</Badge>
                 <Badge variant={item.sentiment === "Positif" ? "positive" : item.sentiment === "Négatif" ? "negative" : "warning"}>

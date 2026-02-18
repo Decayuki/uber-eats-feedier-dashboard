@@ -11,7 +11,10 @@ export function KPICard({ item, icon }: KPICardProps) {
   const TrendIcon = item.trend === "up" ? ArrowUpRight : item.trend === "down" ? ArrowDownRight : ArrowRight;
 
   return (
-    <article className="group rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <article
+      title={`${item.label}: ${item.comment}`}
+      className="group rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+    >
       <div className="mb-3 flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{item.label}</p>
         {icon}

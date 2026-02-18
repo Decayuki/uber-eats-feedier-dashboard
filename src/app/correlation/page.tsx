@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { CorrelationHeatmap } from "@/components/charts/CorrelationHeatmap";
 import { TrendLine } from "@/components/charts/TrendLine";
+import { Tooltip as Hint } from "@/components/ui/Tooltip";
 import { correlationMatrix } from "@/data/correlation";
 import { verbatims } from "@/data/verbatims";
 import { TrancheDelai } from "@/lib/types";
@@ -29,10 +30,15 @@ export default function CorrelationPage() {
       <Header
         title="Corrélation Délai × Thématiques"
         subtitle="Identification des seuils critiques et analyse du débat rapidité versus qualité"
+        helpText="Analyse relationnelle: comment la perception des thèmes évolue en fonction du délai."
+        helpContext="Point pédagogique clé: distinguer corrélation observée et causalité à valider."
       />
 
-      <section className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 text-base font-bold text-zinc-900">Heatmap principale</h2>
+      <section title="Cliquer une cellule pour ouvrir la vue verbatims filtrée." className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold text-zinc-900">
+          Heatmap principale
+          <Hint text="Chaque cellule représente le taux de sentiment positif pour un thème et une tranche de délai." />
+        </h2>
         <CorrelationHeatmap
           matrix={correlationMatrix}
           verbatims={verbatims}
@@ -41,8 +47,11 @@ export default function CorrelationPage() {
       </section>
 
       <section className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
-        <article className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-base font-bold text-zinc-900">Chute par thème</h2>
+        <article title="Comparaison de la résistance des thèmes face à l'augmentation du délai." className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
+          <h2 className="mb-3 inline-flex items-center gap-1 text-base font-bold text-zinc-900">
+            Chute par thème
+            <Hint text="Les courbes les plus pentues indiquent les dimensions les plus sensibles au retard." />
+          </h2>
           <TrendLine
             data={lineData}
             xKey="delay"

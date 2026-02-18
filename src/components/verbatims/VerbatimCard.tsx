@@ -18,6 +18,7 @@ export function VerbatimCard({ item, selected, onClick }: VerbatimCardProps) {
     <button
       type="button"
       onClick={onClick}
+      title={`Verbatim ${item.id} - ${item.sentiment}, NPS ${item.nps}, ${item.delai}, ${item.zone}`}
       className={cn(
         "w-full rounded-xl border p-4 text-left shadow-sm transition-all duration-200 hover:scale-[1.01] hover:shadow-md",
         selected ? "border-emerald-500 bg-emerald-50" : "border-zinc-200 bg-white",
