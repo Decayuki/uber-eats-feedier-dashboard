@@ -102,6 +102,14 @@ export default function ExplorationPage() {
               </PieChart>
             </ResponsiveContainer>
           </div>
+          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs font-semibold text-zinc-600">
+            {sentimentData.map((item) => (
+              <span key={item.name} className="inline-flex items-center gap-1.5" title={`${item.name}: ${item.value}%`}>
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+                {item.name} {item.value}%
+              </span>
+            ))}
+          </div>
         </article>
       </section>
 

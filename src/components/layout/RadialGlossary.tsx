@@ -29,8 +29,8 @@ export function RadialGlossary() {
 
         <div
           className={cn(
-            "pointer-events-none absolute bottom-16 right-1/2 translate-x-1/2 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
-            open ? "w-[320px] opacity-100" : "w-0 overflow-hidden opacity-0",
+            "pointer-events-none absolute bottom-16 right-16 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
+            open ? "w-[340px] opacity-100" : "w-0 overflow-hidden opacity-0",
           )}
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Glossaire pédagogique</p>
@@ -40,10 +40,17 @@ export function RadialGlossary() {
         </div>
 
         {glossaryItems.map((item, index) => {
-          const angle = (index / glossaryItems.length) * Math.PI * 2 - Math.PI / 2;
-          const radius = 118;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
+          const firstRingCount = Math.min(5, glossaryItems.length);
+          const inFirstRing = index < firstRingCount;
+          const ringIndex = inFirstRing ? index : index - firstRingCount;
+          const ringTotal = inFirstRing ? firstRingCount : Math.max(glossaryItems.length - firstRingCount, 1);
+          const minAngle = inFirstRing ? 170 : 185;
+          const maxAngle = inFirstRing ? 262 : 260;
+          const angle = minAngle + ((maxAngle - minAngle) * ringIndex) / Math.max(ringTotal - 1, 1);
+          const radius = inFirstRing ? 96 : 146;
+          const radians = (angle * Math.PI) / 180;
+          const x = Math.cos(radians) * radius;
+          const y = Math.sin(radians) * radius;
 
           return (
             <button

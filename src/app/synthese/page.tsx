@@ -150,8 +150,15 @@ export default function SynthesePage() {
             </div>
 
             <div className="mt-3 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                Top thèmes
+                <Hint text="Ces badges indiquent les sujets dominants observés dans le segment." />
+              </span>
+            </div>
+
+            <div className="mt-2 flex flex-wrap gap-2">
               {segment.themes.map((theme) => (
-                <Badge key={theme} variant="primary" className="cursor-help" title={`Thématique clé du segment: ${theme}`}>
+                <Badge key={theme} variant="primary" title={`Thématique clé du segment: ${theme}`}>
                   {theme}
                 </Badge>
               ))}
