@@ -29,41 +29,27 @@ export function RadialGlossary() {
 
         <div
           className={cn(
-            "pointer-events-none absolute bottom-16 right-0 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
-            open ? "w-[min(92vw,400px)] opacity-100" : "w-0 overflow-hidden opacity-0",
+            "absolute bottom-16 right-0 rounded-xl border border-zinc-200 bg-white/95 p-3 shadow-xl backdrop-blur transition-all duration-200",
+            open ? "w-[min(94vw,420px)] opacity-100" : "pointer-events-none w-0 overflow-hidden opacity-0",
           )}
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Glossaire pédagogique</p>
 
-          <div className="relative mx-auto mt-4 h-64 w-64">
-            <div className="absolute left-1/2 top-1/2 -ml-8 -mt-8 inline-flex h-16 w-16 items-center justify-center rounded-full border border-zinc-200 bg-zinc-900 text-sm font-bold text-white shadow">
-              CX
-            </div>
-            {glossaryItems.map((item, index) => {
-              const angle = -90 + (index * 360) / glossaryItems.length;
-              const radians = (angle * Math.PI) / 180;
-              const radius = 104;
-              const x = Math.cos(radians) * radius;
-              const y = Math.sin(radians) * radius;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  title={`${item.term} — ${item.definition}`}
-                  aria-label={item.term}
-                  onClick={() => setActiveId(item.id)}
-                  className={cn(
-                    "absolute left-1/2 top-1/2 inline-flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-[11px] font-bold text-zinc-700 shadow-sm transition-all duration-200",
-                    activeId === item.id && "border-emerald-300 bg-emerald-50 text-emerald-700 shadow",
-                  )}
-                  style={{
-                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                  }}
-                >
-                  <span className="max-w-[34px] text-center leading-tight">{item.shortLabel}</span>
-                </button>
-              );
-            })}
+          <div className="mt-3 grid grid-cols-4 gap-2 rounded-xl bg-zinc-50 p-2">
+            {glossaryItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                title={item.term}
+                onClick={() => setActiveId(item.id)}
+                className={cn(
+                  "rounded-lg border border-zinc-200 bg-white px-2 py-2 text-[11px] font-bold text-zinc-700",
+                  activeId === item.id && "border-emerald-300 bg-emerald-50 text-emerald-700",
+                )}
+              >
+                {item.shortLabel}
+              </button>
+            ))}
           </div>
 
           <p className="mt-3 text-sm font-bold text-zinc-900">{active.term}</p>
